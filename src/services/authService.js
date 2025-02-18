@@ -28,6 +28,7 @@ const signUp = async (formData) => {
 
 const signIn = async (formData) => {
   try {
+    console.log('formData:', formData);
     const res = await fetch(`${BASE_URL}/sign-in`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -35,7 +36,7 @@ const signIn = async (formData) => {
     });
 
     const data = await res.json();
-
+console.log('data:', res);
     if (data.err) {
       throw new Error(data.err);
     }
