@@ -7,9 +7,9 @@ import SignInForm from './components/SignInForm/SignInForm';
 import Landing from './components/Landing/Landing';
 import Dashboard from './components/Dashboard/Dashboard';
 import CompanyList from './components/CompanyList/CompanyList';
-import * as companyService from './services/companyService';
+import CompanyDetails from './components/CompanyDetails/CompanyDetails';
 import { UserContext } from './contexts/UserContext';
-
+import * as companyService from './services/companyService';
 const App = () => {
   const { user } = useContext(UserContext);
   const [company,setCompany] = useState([]);
@@ -17,9 +17,7 @@ const App = () => {
   useEffect(() => {
     const fetchAllCompanys = async () => {
       const companyData = await companyService.index();
-      setCompany(companyData);
-      // console log to verify
-      console.log('companyData:', companyData);
+            setCompany(companyData);
     };
     if (user) fetchAllCompanys();
   }, [user]);
@@ -33,6 +31,7 @@ const App = () => {
           <>
             {/* Protected routes (available only to signed-in users) */}
             <Route path='/company' element={<CompanyList  company={company}/>} />
+            <Route path='/company/:companyId' element={<CompanyDetails />} />
           </>
         ) : (
           <>
