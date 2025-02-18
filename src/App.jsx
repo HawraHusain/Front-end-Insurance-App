@@ -1,4 +1,4 @@
-import { useContext,useState,useEffect } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router';
 
 import NavBar from './components/NavBar/NavBar';
@@ -17,7 +17,7 @@ const App = () => {
   useEffect(() => {
     const fetchAllCompanys = async () => {
       const companyData = await companyService.index();
-  setCompany(companyData);
+      setCompany(companyData);
       // console log to verify
       console.log('companyData:', companyData);
     };
