@@ -1,57 +1,26 @@
-import { useState, useContext } from 'react';
-import { useNavigate } from 'react-router-dom'; 
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-import { UserContext } from '../../contexts/UserContext'; 
-
-const createCompany = async (companyData) => {
-  try {
-    
-    const response = await fetch('/api/companies', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(companyData),
-    });
-
-    if (!response.ok) {
-      throw new Error('Failed to create company');
-    }
-
-    return await response.json(); 
-  } catch (err) {
-    throw new Error(err.message);
-  }
-};
-
-const CompanyForm = () => {
+const CompanyForm = (props) => {
   const navigate = useNavigate();
-  const { setUser } = useContext(UserContext); 
-  
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState("");
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    address: '',
+    name: "",
+    email: "",
+    phone: "",
+    address: "",
   });
 
   const { name, email, phone, address } = formData;
 
   const handleChange = (evt) => {
-    setMessage(''); 
+    setMessage("");
     setFormData({ ...formData, [evt.target.name]: evt.target.value });
   };
 
   const handleSubmit = async (evt) => {
     evt.preventDefault();
-    try {
-      const newCompany = await createCompany(formData);
-      setUser(newCompany); 
-      navigate('/'); 
-    } catch (err) {
-      setMessage(err.message); 
-    }
+    props.handleAddCompany(formData);
   };
 
   const isFormInvalid = () => {
@@ -64,52 +33,54 @@ const CompanyForm = () => {
       <p>{message}</p>
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor='name'>Company Name:</label>
+          <label htmlFor="name">Company Name:</label>
           <input
-            type='text'
-            id='name'
+            type="text"
+            id="name"
             value={name}
-            name='name'
+            name="name"
             onChange={handleChange}
             required
           />
         </div>
         <div>
-          <label htmlFor='email'>Email:</label>
+          <label htmlFor="email">Email:</label>
           <input
-            type='email'
-            id='email'
+            type="email"
+            id="email"
             value={email}
-            name='email'
+            name="email"
             onChange={handleChange}
             required
           />
         </div>
         <div>
-          <label htmlFor='phone'>Phone:</label>
+          <label htmlFor="phone">Phone:</label>
           <input
-            type='tel'
-            id='phone'
+            type="tel"
+            id="phone"
             value={phone}
-            name='phone'
+            name="phone"
             onChange={handleChange}
             required
           />
         </div>
         <div>
-          <label htmlFor='address'>Address:</label>
+          <label htmlFor="address">Address:</label>
           <input
-            type='text'
-            id='address'
+            type="text"
+            id="address"
             value={address}
-            name='address'
+            name="address"
             onChange={handleChange}
             required
           />
         </div>
         <div>
           <button disabled={isFormInvalid()}>Create Company</button>
-          <button type="button" onClick={() => navigate('/')}>Cancel</button>
+          <button type="button" onClick={() => navigate("/")}>
+            Cancel
+          </button>
         </div>
       </form>
     </main>

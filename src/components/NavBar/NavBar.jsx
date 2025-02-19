@@ -2,6 +2,7 @@ import { useContext } from 'react';
 import { Link } from 'react-router';
 
 import { UserContext } from '../../contexts/UserContext';
+
 const NavBar = () => {
   const { user, setUser } = useContext(UserContext);
 
@@ -16,6 +17,7 @@ const NavBar = () => {
         <ul>
           <li>Welcome, {user.username}</li>
           <li><Link to='/company'>Companies</Link></li>
+          <li><Link to='/company/new'>Add Company</Link></li>
           <li><Link to='/' onClick={handleSignOut}>Sign Out</Link></li>
         </ul>
       ) : (

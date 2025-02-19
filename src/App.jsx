@@ -20,7 +20,7 @@ const App = () => {
 
   const handleAddCompany = async (companyFormData) => {
     try {
-      const newCompany = await companyService.create(companyFormData);
+      const newCompany = await companyService.companyCreate(companyFormData);
       setCompany([newCompany, ...company]);
       navigate("/company");
     } catch (error) {
@@ -47,7 +47,7 @@ const App = () => {
           element={<CompanyForm handleAddCompany={handleAddCompany} />}
         />
 
-        <Route path="/" element={user ? <Dashboard /> : <Landing />} />
+        
         {user ? (
           <>
             {/* Protected routes (available only to signed-in users) */}
@@ -63,6 +63,7 @@ const App = () => {
             <Route path="/sign-in" element={<SignInForm />} />
           </>
         )}
+        <Route path="/" element={user ? <Dashboard /> : <Landing />} />
       </Routes>
     </>
   );
