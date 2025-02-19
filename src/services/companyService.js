@@ -9,12 +9,9 @@ const index = async () => {
 
     const data = await res.json();
 
-    console.log(data);
-
     if (data.err) {
       throw new Error(data.err);
     }
-    console.log(data);
     return data
   } catch (err) {
     console.log(err);
@@ -26,15 +23,10 @@ const show = async (companyId) => {
         const res = await fetch(`${BASE_URL}/${companyId}`, {
             headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
           });
-      
           const data = await res.json();
-      
-          console.log(data);
-      
           if (data.err) {
             throw new Error(data.err);
           }
-          console.log(data);
           return data
     }
     catch(err){
@@ -42,7 +34,39 @@ const show = async (companyId) => {
         throw new Error(err);
     }
 }
+
+const deleteCompany = async (companyId) => {
+  try {
+    const res = await fetch(`${BASE_URL}/${companyId}`, {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+    });
+    return res.json();
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const updateCompany = async (companyId, companyFormData) => {
+  try {
+    const res = await fetch(`${BASE_URL}/${companyId}`, {
+      method: 'PUT',
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(companyFormData),
+    });
+    return res.json();
+  } catch (error) {
+    console.log(error);
+  }
+}
     export {
         index,
         show,
+        deleteCompany,
+        updateCompany,
       };
