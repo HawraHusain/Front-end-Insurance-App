@@ -21,6 +21,22 @@ const index = async () => {
     throw new Error(err);
   }
 };
+  //create  
+  const companycreate = async (companyFormData) => {
+    try {
+      const res = await fetch(BASE_URL, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(companyFormData),
+      });
+      return res.json();
+    } catch (error) {
+      console.log(error);
+    }
+  };
 const show = async (companyId) => {
     try{
         const res = await fetch(`${BASE_URL}/${companyId}`, {
@@ -44,5 +60,6 @@ const show = async (companyId) => {
 }
     export {
         index,
+  companycreate,
         show,
       };
