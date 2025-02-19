@@ -18,4 +18,3 @@ VITE_BACK_END_SERVER_URL=http://localhost:3000
 
 Start the app with `npm run dev`.
 
-Test change
