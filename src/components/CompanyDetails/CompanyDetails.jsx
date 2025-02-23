@@ -25,7 +25,8 @@ const CompanyDetails = (props) => {
             <h1>{company.address}</h1>
           </div>
           <div>
-            <button><Link to={`/company/${companyId}`}>Edit</Link></button>
+            
+        <button> <Link to={`/company/${companyId}/edit`}>Edit</Link></button> 
             <button onClick={() => props.handleDeleteCompany(companyId)}>
               Delete
             </button>
