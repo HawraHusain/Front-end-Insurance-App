@@ -18,10 +18,10 @@ const index = async () => {
     throw new Error(err);
   }
 };
-  //create  
-  const companycreate = async (companyFormData) => {
+
+  const createCompany = async (companyFormData) => {
     try {
-      const res = await fetch(BASE_URL, {
+      const res = await fetch(`${BASE_URL}/new`,{
         method: 'POST',
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -29,6 +29,7 @@ const index = async () => {
         },
         body: JSON.stringify(companyFormData),
       });
+      console.log(res);
       return res.json();
     } catch (error) {
       console.log(error);
@@ -65,15 +66,15 @@ const deleteCompany = async (companyId) => {
   }
 };
 
-const updateCompany = async (companyId, companyFormData) => {
+const updateCompany = async (companyId, formData) => {
   try {
-    const res = await fetch(`${BASE_URL}/${companyId}`, {
+    const res = await fetch(`${BASE_URL}/${companyId}/edit`, {
       method: 'PUT',
       headers: {
         Authorization: `Bearer ${localStorage.getItem('token')}`,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(companyFormData),
+      body: JSON.stringify(formData),
     });
     return res.json();
   } catch (error) {
@@ -82,8 +83,8 @@ const updateCompany = async (companyId, companyFormData) => {
 }
     export {
         index,
-  companycreate,
         show,
         deleteCompany,
         updateCompany,
+        createCompany,
       };

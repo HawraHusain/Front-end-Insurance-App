@@ -8,19 +8,19 @@ import Landing from './components/Landing/Landing';
 import Dashboard from './components/Dashboard/Dashboard';
 import CompanyList from './components/CompanyList/CompanyList';
 import CompanyDetails from './components/CompanyDetails/CompanyDetails';
-import CompanyForm from "./components/CompanyForm/CompanyForm";
 import { UserContext } from './contexts/UserContext';
 import * as companyService from './services/companyService';
+import CompanyForm from './components/CompanyForm/CompanyForm';
+
 const App = () => {
   const { user } = useContext(UserContext);
   const [company, setCompany] = useState([]);
   const navigate = useNavigate();
 
-  //create
 
-  const handleAddCompany = async (companyFormData) => {
+  const handleAddCompany = async (formData) => {
     try {
-      const newCompany = await companyService.create(companyFormData);
+      const newCompany = await companyService.createCompany(formData);
       setCompany([newCompany, ...company]);
       navigate("/company");
     } catch (error) {
@@ -35,6 +35,15 @@ const App = () => {
     navigate("/company");
   };
 
+  const handleUpdateCompany = async (companyId , formData) => {
+    try {
+      const updatedCompany = await companyService.updateCompany(companyId,formData);
+      setCompany(company.map((comp) => (comp._id === updatedCompany._id ? updatedCompany : comp)));
+      navigate(`/company/${companyId}`);
+    } catch (error) {
+      console.error("Error updating company:", error);
+    }
+  };
 
 
   useEffect(() => {
@@ -51,15 +60,12 @@ const App = () => {
     <>
       <NavBar />
       <Routes>
-        <Route
-          path="/company/new"
-          element={<CompanyForm handleAddCompany={handleAddCompany} />}
-        />
-
         <Route path="/" element={user ? <Dashboard /> : <Landing />} />
         {user ? (
           <>
             {/* Protected routes (available only to signed-in users) */}
+            <Route path="/company/new" element={<CompanyForm handleAddCompany={handleAddCompany}/>} />
+
             <Route
               path="/company"
               element={<CompanyList company={company} />}
@@ -70,10 +76,8 @@ const App = () => {
                 <CompanyDetails handleDeleteCompany={handleDeleteCompany} />
               }
             />
-            <Route
-              path='/company/:companyId'
-              element={<CompanyForm />}
-            />
+            <Route path="/company/:companyId/edit" element={<CompanyForm handleUpdateCompany={handleUpdateCompany} />} />
+
           </>
         ) : (
           <>
