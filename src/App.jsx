@@ -11,10 +11,15 @@ import CompanyDetails from './components/CompanyDetails/CompanyDetails';
 import { UserContext } from './contexts/UserContext';
 import * as companyService from './services/companyService';
 import CompanyForm from './components/CompanyForm/CompanyForm';
-
+import * as insuranceService from './services/insuranceService';
+import InsuranceForm from "./components/InsuranceForm/InsuranceForm";
+import InsuranceList from "./components/InsuranceList/InsuranceList";
+import InsuranceDetails from "./components/InsuranceDetails/InsuranceDetails";
 const App = () => {
   const { user } = useContext(UserContext);
   const [company, setCompany] = useState([]);
+  const [insurance, setInsurance] = useState([]);
+
   const navigate = useNavigate();
 
 
@@ -29,7 +34,6 @@ const App = () => {
   };
 
   const handleDeleteCompany = async (companyId) => {
-    console.log("companyId", companyId);
     const deletedCompany = await companyService.deleteCompany(companyId);
     setCompany(company.filter((comp) => comp._id !== deletedCompany._id));
     navigate("/company");
@@ -45,15 +49,46 @@ const App = () => {
     }
   };
 
+  const handleAddInsurance = async (formData) => {
+    try {
+      const newInsurance = await insuranceService.createInsurance(formData); 
+      setInsurance([newInsurance, ...insurance]);
+      navigate("/insurance");
+    } catch (error) {
+      console.error("Error creating insurance:", error);
+    }
+  };
+
+  const handleDeleteInsurance = async (insurancePolicyId) => {
+    try {
+      const deletedInsurance = await insuranceService.deleteInsurance(insurancePolicyId);
+      setInsurance(insurance.filter((ins) => ins._id !== deletedInsurance._id));
+      navigate("/insurance");
+    } catch (error) {
+      console.error("Error deleting insurance:", error);
+    }
+  };
+
+  const handleUpdateInsurance = async (insurancePolicyId, formData) => {
+    try {
+      const updatedInsurance = await insuranceService.updateInsurance(insurancePolicyId, formData);
+      setInsurance(insurance.map((ins) => (ins._id === updatedInsurance._id ? updatedInsurance : ins)));
+      navigate(`/insurance/${insurancePolicyId}/edit`);
+    } catch (error) {
+      console.error("Error updating insurance:", error);
+    }
+  };
 
   useEffect(() => {
     const fetchAllCompanys = async () => {
       const companyData = await companyService.index();
       setCompany(companyData);
-      // console log to verify
-      console.log("companyData:", companyData);
     };
-    if (user) fetchAllCompanys();
+    const fetchAllInsurances = async () => {
+      const insuranceData = await insuranceService.index();
+      setInsurance(insuranceData);
+    };
+    if (user){ fetchAllCompanys(); fetchAllInsurances(); }
   }, [user]);
 
   return (
@@ -63,25 +98,17 @@ const App = () => {
         <Route path="/" element={user ? <Dashboard /> : <Landing />} />
         {user ? (
           <>
-            {/* Protected routes (available only to signed-in users) */}
             <Route path="/company/new" element={<CompanyForm handleAddCompany={handleAddCompany}/>} />
-
-            <Route
-              path="/company"
-              element={<CompanyList company={company} />}
-            />
-            <Route
-              path="/company/:companyId"
-              element={
-                <CompanyDetails handleDeleteCompany={handleDeleteCompany} />
-              }
-            />
-            <Route path="/company/:companyId/edit" element={<CompanyForm handleUpdateCompany={handleUpdateCompany} />} />
-
+            <Route path="/company" element={<CompanyList company={company} />}/>
+            <Route path="/company/:companyId" element={ <CompanyDetails handleDeleteCompany={handleDeleteCompany} />}/>
+            <Route path="/company/:companyId/edit" element={<CompanyForm handleUpdateCompany={handleUpdateCompany} />}/>
+            <Route path="/insurance/new" element={<InsuranceForm handleAddInsurance={handleAddInsurance} company={company}/>} />
+            <Route path="/insurance" element={<InsuranceList insurance={insurance} />} />
+            <Route path="/insurance/:insurancePolicyId" element={<InsuranceDetails handleDeleteInsurance={handleDeleteInsurance} />} />
+            <Route path="/insurance/:insurancePolicyId/edit" element={<InsuranceForm handleUpdateInsurance={handleUpdateInsurance} />} />
           </>
         ) : (
           <>
-            {/* Non-user routes (available only to guests) */}
             <Route path="/sign-up" element={<SignUpForm />} />
             <Route path="/sign-in" element={<SignInForm />} />
           </>
