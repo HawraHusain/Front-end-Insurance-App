@@ -1,9 +1,12 @@
 html,
 body {
   margin: 0;
+  height: 100vh;
   font-family: sans-serif;
 background-image: url('/src/images/1.png');
 background-repeat: no-repeat;
 background-position: center;
 justify-content: center;
+overflow: scroll;
+background-size: cover;
 }

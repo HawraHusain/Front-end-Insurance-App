@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import * as insuranceService from "../../services/insuranceService";
-
+import style from "./InsuranceForm.module.css";
 const InsuranceForm = (props) => {
   const { insurancePolicyId } = useParams();
   const [formData, setFormData] = useState({
@@ -51,10 +51,12 @@ const InsuranceForm = (props) => {
   };
 
   return (
+            <div className={style.container}>
+           <div className={style.formBK}>
     <main>
-      <h1>{insurancePolicyId ? 'Edit Insurance Policy' : 'New Insurance Policy'}</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
+      <h1>{insurancePolicyId ? 'Edit Insurance' : 'Add New Insurance'}</h1>
+      <form onSubmit={handleSubmit} className={style.formAlign}>
+        <div className={style.formGroup}>
           <label htmlFor="category">Category:</label>
           <select
             id="category"
@@ -70,7 +72,7 @@ const InsuranceForm = (props) => {
             <option value="home">Home</option>
           </select>
         </div>
-        <div>
+        <div className={style.formGroup}>
           <label htmlFor="policyNo">Policy Number:</label>
           <input
             type="number"
@@ -81,7 +83,7 @@ const InsuranceForm = (props) => {
             disabled={insurancePolicyId ? true : false} // Make policyNo immutable if editing
           />
         </div>
-        <div>
+        <div className={style.formGroup}>
           <label htmlFor="icon">Icon:</label>
           <input
             type="text"
@@ -91,7 +93,7 @@ const InsuranceForm = (props) => {
             onChange={handleChange}
           />
         </div>
-        <div>
+        <div className={style.formGroup}>
           <label htmlFor="dateIssued">Date Issued:</label>
           <input
             type="date"
@@ -101,7 +103,7 @@ const InsuranceForm = (props) => {
             onChange={handleChange}
           />
         </div>
-        <div>
+        <div className={style.formGroup}>
           <label htmlFor="dateExpiry">Date Expiry:</label>
           <input
             type="date"
@@ -111,7 +113,7 @@ const InsuranceForm = (props) => {
             onChange={handleChange}
           />
         </div>
-        <div>
+        <div className={style.formGroup}>
           <label htmlFor="companyId">Company ID:</label>
           <select
             id="companyId"
@@ -126,7 +128,7 @@ const InsuranceForm = (props) => {
             ))}
           </select>
         </div>
-        <div>
+        <div className={style.formGroup}>
           <label htmlFor="subscriptionPrice">Subscription Price:</label>
           <input
             type="number"
@@ -143,6 +145,8 @@ const InsuranceForm = (props) => {
         </div>
       </form>
     </main>
+  </div>
+</div>
   );
 };
 

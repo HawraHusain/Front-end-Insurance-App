@@ -48,7 +48,7 @@ const CompanyForm = (props) => {
         <div className={style.container}>
        <div className={style.formBK}>
     <main>
-      <h1>{companyId?'Edit Company':'New Company'}</h1>
+      <h1>{companyId?'Edit Company':'Add New Company'}</h1>
       <form onSubmit={handleSubmit} className={style.formAlign}>
         <div className={style.formGroup}>
           <label htmlFor="name">Company Name:</label>
