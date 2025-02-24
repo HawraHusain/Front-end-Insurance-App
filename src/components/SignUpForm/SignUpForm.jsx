@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router';
 import { signUp } from '../../services/authService';
 
 import { UserContext } from '../../contexts/UserContext';
-
+import styles from './SignUpForm.module.css';
 const SignUpForm = () => {
   const navigate = useNavigate();
   const { setUser } = useContext(UserContext);
@@ -38,12 +38,14 @@ const SignUpForm = () => {
   };
 
   return (
+        <div className={styles.container}>
+       <div className={styles.formBK}>
     <main>
       <h1>Sign Up</h1>
       <p>{message}</p>
       <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor='username'>Username:</label>
+        <div className={styles.formGroup}>
+          <label htmlFor='username'>Username</label>
           <input
             type='text'
             id='name'
@@ -51,10 +53,9 @@ const SignUpForm = () => {
             name='username'
             onChange={handleChange}
             required
+            placeholder='Enter username'
           />
-        </div>
-        <div>
-          <label htmlFor='password'>Password:</label>
+          <label htmlFor='password'>Password</label>
           <input
             type='password'
             id='password'
@@ -62,10 +63,9 @@ const SignUpForm = () => {
             name='password'
             onChange={handleChange}
             required
+            placeholder='Enter password'
           />
-        </div>
-        <div>
-          <label htmlFor='confirm'>Confirm Password:</label>
+          <label htmlFor='confirm'>Confirm Password</label>
           <input
             type='password'
             id='confirm'
@@ -73,14 +73,17 @@ const SignUpForm = () => {
             name='passwordConf'
             onChange={handleChange}
             required
+            placeholder='Confirm password'
           />
         </div>
-        <div>
+        <div className={styles.formButton}>
           <button disabled={isFormInvalid()}>Sign Up</button>
           <button onClick={() => navigate('/')}>Cancel</button>
         </div>
       </form>
     </main>
+    </div>
+    </div>
   );
 };
 

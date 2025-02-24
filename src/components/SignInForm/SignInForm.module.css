@@ -1,0 +1,50 @@
+.formBK{
+    border: none;
+    background-color: white;
+    justify-content: center;
+    align-items: center;
+    display: flex;  
+    width: 40rem;
+    height: 30rem;
+}
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+h1{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    color: #3e5836;
+}
+.formGroup{
+    display: flex;
+    flex-direction: column;
+    margin: 2rem;
+    gap: 1rem;
+    color:  #3e5836;
+}
+
+label{
+    font-size: 1.5rem;
+}
+input{
+    width: 20rem;
+    height: 2rem;
+    border: 2px solid #D1DAAC;
+    border-radius: 5px;
+    padding: 0.5rem;
+    color: #3e5836;
+    font-size: 1rem;
+}
+input::placeholder{
+    font-size: 1rem;
+    color: #3e5836;
+}
+.formButton{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}

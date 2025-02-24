@@ -1,0 +1,27 @@
+.formBK{
+    border: none;
+    background-color: white;
+    justify-content: center;
+    align-items: center;
+    display: flex;  
+    width: 40rem;
+    height: 30rem;
+}
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.formGroup{
+    display: flex;
+    flex-direction: column;
+    margin: 1rem;
+    gap: 0.5rem;
+    color:  #3e5836;
+}
+.formButton{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}

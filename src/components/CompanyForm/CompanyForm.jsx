@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import * as companyService from "../../services/companyService";
 
-
+import style from "./CompanyForm.module.css";
 const CompanyForm = (props) => {
   const { companyId } = useParams();
   const [formData, setFormData] = useState({
@@ -45,10 +45,12 @@ const CompanyForm = (props) => {
   };
   
   return(
+        <div className={style.container}>
+       <div className={style.formBK}>
     <main>
       <h1>{companyId?'Edit Company':'New Company'}</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
+      <form onSubmit={handleSubmit} className={style.formAlign}>
+        <div className={style.formGroup}>
           <label htmlFor="name">Company Name:</label>
           <input
             type="text"
@@ -56,9 +58,10 @@ const CompanyForm = (props) => {
             name="name"
             value={formData.name}
             onChange={handleChange}
+            placeholder="Enter Company Name"
           />
         </div>
-        <div>
+        <div className={style.formGroup}>
           <label htmlFor="email">Email:</label>
           <input
             type="email"
@@ -66,9 +69,10 @@ const CompanyForm = (props) => {
             name="email"
             value={formData.email}
             onChange={handleChange}
+            placeholder="Enter Email"
           />
         </div>
-        <div>
+        <div className={style.formGroup}>
           <label htmlFor="phone">Phone:</label>
           <input
             type="tel"
@@ -76,9 +80,10 @@ const CompanyForm = (props) => {
             name="phone"
             value={formData.phone}
             onChange={handleChange}
+            placeholder="Enter Phone"
           />
         </div>
-        <div>
+        <div className={style.formGroup}>
           <label htmlFor="address">Address:</label>
           <input
             type="text"
@@ -86,6 +91,7 @@ const CompanyForm = (props) => {
             name="address"
             value={formData.address}
             onChange={handleChange}
+            placeholder="Enter Address"
           />
         </div>
         <div>
@@ -94,6 +100,8 @@ const CompanyForm = (props) => {
           </button>        </div>
         </form>
     </main>
+    </div>
+    </div>
   );
   };
   export default CompanyForm;
