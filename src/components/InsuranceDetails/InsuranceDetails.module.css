@@ -30,3 +30,14 @@
     color: rgb(65, 145, 207);
     font-size: 1.5rem;
 }
+
+.Header{
+    color: #3e5836;
+    font-size: 1.5rem;
+    justify-content: center;
+    display: flex;
+    align-items: center;  
+}
+.imgCss{
+    float: inline-end;
+}
