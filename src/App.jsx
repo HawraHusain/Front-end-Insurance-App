@@ -84,7 +84,8 @@ const App = () => {
       const companyData = await companyService.index();
       setCompany(companyData);
     };
-    const fetchAllInsurances = async () => {      
+    const fetchAllInsurances = async () => { 
+      const insuranceData = await companyService.index();     
       setInsurance(insuranceData);
     };
     if (user){ fetchAllCompanys(); fetchAllInsurances(); }
