@@ -29,7 +29,6 @@ const index = async () => {
         },
         body: JSON.stringify(companyFormData),
       });
-      console.log(res);
       return res.json();
     } catch (error) {
       console.log(error);

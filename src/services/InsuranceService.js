@@ -21,7 +21,6 @@ const index = async () => {
 };
 
 const createInsurance = async (formData) => {
-  console.log(formData);
   
   try {
     const res = await fetch(`${BASE_URL}/new`, {
