@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router';
 import { signIn } from '../../services/authService';
 
 import { UserContext } from '../../contexts/UserContext';
-
+import style from './SignInForm.module.css';
 const SignInForm = () => {
   const navigate = useNavigate();
   const { setUser } = useContext(UserContext);
@@ -31,12 +31,15 @@ const SignInForm = () => {
   };
 
   return (
+    <div className={style.container}>
+   <div className={style.formBK}>
     <main>
+
       <h1>Sign In</h1>
       <p>{message}</p>
       <form autoComplete='off' onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor='email'>Username:</label>
+        <div className={style.formGroup}>
+          <label htmlFor='email'>Username</label>
           <input
             type='text'
             autoComplete='off'
@@ -45,10 +48,9 @@ const SignInForm = () => {
             name='username'
             onChange={handleChange}
             required
+            placeholder='Enter your username'
           />
-        </div>
-        <div>
-          <label htmlFor='password'>Password:</label>
+          <label htmlFor='password'>Password</label>
           <input
             type='password'
             autoComplete='off'
@@ -57,14 +59,17 @@ const SignInForm = () => {
             name='password'
             onChange={handleChange}
             required
+            placeholder='Enter your password'
           />
         </div>
-        <div>
+        <div className={style.formButton}>
           <button>Sign In</button>
           <button onClick={() => navigate('/')}>Cancel</button>
         </div>
       </form>
     </main>
+</div>
+</div>
   );
 };
 
