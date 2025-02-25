@@ -5,8 +5,7 @@
     align-items: center;
     display: flex;  
     width: 10rem;
-    height: 5rem;
-    border-radius: 200px;
+    height: 10rem;
 }
 .container{
     display: flex;
