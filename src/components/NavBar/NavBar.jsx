@@ -17,7 +17,7 @@ const NavBar = () => {
         <ul>
           <button><Link to='/company'>Companies</Link></button>
           <button><Link to='/company/new'>Add Company</Link></button>
-          <button><Link to='/insurance'>Incurance policy</Link></button>
+          <button><Link to='/insurance'>Insurance policy</Link></button>
           <button><Link to='/insurance/new'>Add insurance</Link></button>
           <button><Link to='/' onClick={handleSignOut}>Sign Out</Link></button>
         </ul>
