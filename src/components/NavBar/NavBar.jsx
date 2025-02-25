@@ -17,8 +17,8 @@ const NavBar = () => {
           <li>Welcome, {user.username}</li>
           <li><Link to='/company'>Companies</Link></li>
           <li><Link to='/company/new'>Add Company</Link></li>
-          <li><Link to='/insurance'>Incurance policy</Link></li>
-          <li><Link to='/insurance/new'>Add insurance</Link></li>
+          <li><Link to='/insurance'>Insurance policies</Link></li>
+          <li><Link to='/insurance/new'>Add insurance policy</Link></li>
           <li><Link to='/' onClick={handleSignOut}>Sign Out</Link></li>
         </ul>
       ) : (

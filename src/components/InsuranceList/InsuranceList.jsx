@@ -1,19 +1,19 @@
-// InsuranceList.js
-import React from 'react';
-import { Link } from 'react-router';
+import { Link } from "react-router";
 
-const InsuranceList = ({ insurance }) => {
+const InsuranceList = (props) => {
   return (
-    <div>
-      <h2>Insurance Policies</h2>
-      <ul>
-        {insurance.map((ins) => (
-          <li key={ins._id}>
-            <Link to={`/insurance/${ins._id}`}>{ins.policyNo} - {ins.category}</Link>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <main>
+
+      {props.insurance.map((ins) => (
+        <Link key={ins._id} to={`/insurance/${ins._id}`}>
+          <article>
+            <h1>
+              {ins.policyNo} - {ins.category}
+            </h1>
+          </article>
+        </Link>
+      ))}
+    </main>
   );
 };
 

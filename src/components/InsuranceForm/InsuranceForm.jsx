@@ -1,8 +1,10 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router";
-import * as insuranceService from "../../services/insuranceService";
+import { useEffect, useState, useContext } from "react";
+import { UserContext } from '../../contexts/UserContext';
+import { useParams, Link } from "react-router";
+import * as insuranceService from "../../services/InsuranceService";
 
 const InsuranceForm = (props) => {
+  const { user } = useContext(UserContext);
   const { insurancePolicyId } = useParams();
   const [formData, setFormData] = useState({
     category: "",
@@ -11,12 +13,23 @@ const InsuranceForm = (props) => {
     dateIssued: "",
     dateExpiry: "",
     companyId: "",
+    userId: user._id,
     subscriptionPrice: "",
   });
 
   useEffect(() => {
     const fetchInsurance = async () => {
       const insuranceData = await insuranceService.showInsurance(insurancePolicyId);
+      // const dateExpiry = Date(insuranceData.dateExpiry)
+      // const dateIssued = Date(insuranceData.dateIssued)
+      // const format = "yyyy-MM-dd";
+      // const local = "en-US";
+      // insuranceData.dateIssued = formatDate(dateIssued, format, local)
+      // insuranceData.dateExpiry = formatDate(dateExpiry, format, local)
+
+
+      // console.log(insuranceData);
+      
       setFormData(insuranceData);
     };
     if (insurancePolicyId) fetchInsurance();
@@ -28,6 +41,7 @@ const InsuranceForm = (props) => {
         dateIssued: "",
         dateExpiry: "",
         companyId: "",
+        userId: user._id,
         subscriptionPrice: "",
       });
     };
@@ -46,9 +60,9 @@ const InsuranceForm = (props) => {
     }
   };
 
-  const isFormInvalid = () => {
-    return !(formData.category && formData.policyNo && formData.icon && formData.dateIssued && formData.dateExpiry && formData.companyId && formData.subscriptionPrice);
-  };
+  // const isFormInvalid = () => {
+  //   return !(formData.category && formData.policyNo && formData.icon && formData.dateIssued && formData.dateExpiry && formData.companyId  && formData.userId && formData.subscriptionPrice);
+  // };
 
   return (
     <main>
@@ -137,9 +151,15 @@ const InsuranceForm = (props) => {
           />
         </div>
         <div>
-          <button type="submit" disabled={isFormInvalid()}>
+          <button type="submit" >
+          {/* disabled={isFormInvalid()} */}
             {insurancePolicyId ? "Update Insurance Policy" : "Create Insurance Policy"}
           </button>
+          <button>
+              <Link to={insurancePolicyId ? `/insurance/${insurancePolicyId}`: `/insurance`}>
+               Back
+              </Link>
+            </button>
         </div>
       </form>
     </main>

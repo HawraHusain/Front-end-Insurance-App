@@ -11,7 +11,7 @@ import CompanyDetails from './components/CompanyDetails/CompanyDetails';
 import { UserContext } from './contexts/UserContext';
 import * as companyService from './services/companyService';
 import CompanyForm from './components/CompanyForm/CompanyForm';
-import * as insuranceService from './services/insuranceService';
+import * as InsuranceService from './services/InsuranceService';
 import InsuranceForm from "./components/InsuranceForm/InsuranceForm";
 import InsuranceList from "./components/InsuranceList/InsuranceList";
 import InsuranceDetails from "./components/InsuranceDetails/InsuranceDetails";
@@ -51,7 +51,7 @@ const App = () => {
 
   const handleAddInsurance = async (formData) => {
     try {
-      const newInsurance = await insuranceService.createInsurance(formData); 
+      const newInsurance = await InsuranceService.createInsurance(formData); 
       setInsurance([newInsurance, ...insurance]);
       navigate("/insurance");
     } catch (error) {
@@ -61,7 +61,7 @@ const App = () => {
 
   const handleDeleteInsurance = async (insurancePolicyId) => {
     try {
-      const deletedInsurance = await insuranceService.deleteInsurance(insurancePolicyId);
+      const deletedInsurance = await InsuranceService.deleteInsurance(insurancePolicyId);
       setInsurance(insurance.filter((ins) => ins._id !== deletedInsurance._id));
       navigate("/insurance");
     } catch (error) {
@@ -69,11 +69,11 @@ const App = () => {
     }
   };
 
-  const handleUpdateInsurance = async (insurancePolicyId, formData) => {
+  const handleUpdateInsurance = async (insurancePolicyId, formData) => {    
     try {
-      const updatedInsurance = await insuranceService.updateInsurance(insurancePolicyId, formData);
+      const updatedInsurance = await InsuranceService.updateInsurance(insurancePolicyId, formData);
       setInsurance(insurance.map((ins) => (ins._id === updatedInsurance._id ? updatedInsurance : ins)));
-      navigate(`/insurance/${insurancePolicyId}/edit`);
+      navigate(`/insurance/${insurancePolicyId}`);
     } catch (error) {
       console.error("Error updating insurance:", error);
     }
@@ -84,8 +84,7 @@ const App = () => {
       const companyData = await companyService.index();
       setCompany(companyData);
     };
-    const fetchAllInsurances = async () => {
-      const insuranceData = await insuranceService.index();
+    const fetchAllInsurances = async () => {      
       setInsurance(insuranceData);
     };
     if (user){ fetchAllCompanys(); fetchAllInsurances(); }
@@ -104,8 +103,8 @@ const App = () => {
             <Route path="/company/:companyId/edit" element={<CompanyForm handleUpdateCompany={handleUpdateCompany} />}/>
             <Route path="/insurance/new" element={<InsuranceForm handleAddInsurance={handleAddInsurance} company={company}/>} />
             <Route path="/insurance" element={<InsuranceList insurance={insurance} />} />
-            <Route path="/insurance/:insurancePolicyId" element={<InsuranceDetails handleDeleteInsurance={handleDeleteInsurance} />} />
-            <Route path="/insurance/:insurancePolicyId/edit" element={<InsuranceForm handleUpdateInsurance={handleUpdateInsurance} />} />
+            <Route path="/insurance/:insurancePolicyId" element={<InsuranceDetails handleDeleteInsurance={handleDeleteInsurance}  insurance={insurance}/>} />
+            <Route path="/insurance/:insurancePolicyId/edit" element={<InsuranceForm handleUpdateInsurance={handleUpdateInsurance} company={company}/>} />
           </>
         ) : (
           <>

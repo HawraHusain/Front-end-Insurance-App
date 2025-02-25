@@ -1,12 +1,10 @@
 import { useParams, Link } from "react-router";
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState } from "react";
 import * as companyService from "../../services/companyService";
-import { UserContext } from "../../contexts/UserContext";
 
 const CompanyDetails = (props) => {
   const [company, setCompany] = useState(null);
   const { companyId } = useParams();
-  const { user } = useContext(UserContext);
   useEffect(() => {
     const fetchCompany = async () => {
       const companyData = await companyService.show(companyId);
