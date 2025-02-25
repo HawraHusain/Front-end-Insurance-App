@@ -21,16 +21,11 @@ const InsuranceForm = (props) => {
   useEffect(() => {
     const fetchInsurance = async () => {
       const insuranceData = await insuranceService.showInsurance(insurancePolicyId);
-      // const dateExpiry = Date(insuranceData.dateExpiry)
-      // const dateIssued = Date(insuranceData.dateIssued)
-      // const format = "yyyy-MM-dd";
-      // const local = "en-US";
-      // insuranceData.dateIssued = formatDate(dateIssued, format, local)
-      // insuranceData.dateExpiry = formatDate(dateExpiry, format, local)
+       const dateExpiry = insuranceData.dateExpiry.split('T')[0];
+    const dateIssued = insuranceData.dateIssued.split('T')[0];
+      insuranceData.dateExpiry = dateExpiry;
+      insuranceData.dateIssued = dateIssued;
 
-
-      // console.log(insuranceData);
-      
       setFormData(insuranceData);
     };
     if (insurancePolicyId) fetchInsurance();
@@ -61,9 +56,9 @@ const InsuranceForm = (props) => {
     }
   };
 
-  // const isFormInvalid = () => {
-  //   return !(formData.category && formData.policyNo && formData.icon && formData.dateIssued && formData.dateExpiry && formData.companyId  && formData.userId && formData.subscriptionPrice);
-  // };
+  const isFormInvalid = () => {
+    return !(formData.category && formData.policyNo && formData.dateIssued && formData.dateExpiry && formData.companyId  && formData.userId && formData.subscriptionPrice || formData.icon);
+  };
 
   return (
             <div className={style.container}>
@@ -136,6 +131,8 @@ const InsuranceForm = (props) => {
             value={formData.companyId}
             onChange={handleChange}
           >
+       <option value="">Select Company</option>
+
             {props.company.map((comp) =>(
 
               <option key={comp._id} value={comp._id}>{comp.name}</option>
@@ -154,8 +151,8 @@ const InsuranceForm = (props) => {
           />
         </div>
         <div>
-          <button type="submit" >
-          {/* disabled={isFormInvalid()} */}
+          <button type="submit" disabled={isFormInvalid()}>
+          
             {insurancePolicyId ? "Update Insurance Policy" : "Create Insurance Policy"}
           </button>
           <button>

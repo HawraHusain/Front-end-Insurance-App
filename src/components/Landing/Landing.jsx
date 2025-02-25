@@ -1,8 +1,13 @@
+import style from "./Landing.module.css"
 const Landing = () => {
   return (
     <main>
-      <h1>Hello, you are on the landing page for visitors.</h1>
-      <p>Sign up now, or sign in to see your super secret dashboard!</p>
+            <div className={style.container}>
+      
+      <h1 className={style.h1Class}>Sign in if you have already account, 
+        Otherwise Sign up for Free
+      </h1>
+      </div>
     </main>
   );
 };

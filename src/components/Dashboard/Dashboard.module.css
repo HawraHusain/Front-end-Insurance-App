@@ -1,0 +1,19 @@
+.h1Class{
+    border: none;
+    background-color: white;
+    justify-content: center;
+    align-items: center;
+    display: flex;  
+    width: 40rem;
+    height: auto; 
+    padding: 2rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    border-radius: 8px; 
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+}

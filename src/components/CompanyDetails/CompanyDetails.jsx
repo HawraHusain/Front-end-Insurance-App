@@ -1,7 +1,7 @@
 import { useParams, Link } from "react-router";
 import { useEffect, useState } from "react";
 import * as companyService from "../../services/companyService";
-
+import style from "./CompanyDetails.module.css";
 const CompanyDetails = (props) => {
   const [company, setCompany] = useState(null);
   const { companyId } = useParams();
@@ -16,19 +16,36 @@ const CompanyDetails = (props) => {
     <main>
       {company ? (
         <>
-          <div>
-            <h1>{company.name}</h1>
-            <h1>{company.email}</h1>
-            <h1>{company.phone}</h1>
-            <h1>{company.address}</h1>
+                <div className={style.container}>
+               <div className={style.formBK}>
+            <div className={style.formGroup}>
+            <h1 className={style.companyH1}>Company Name:</h1>
+            <h2 className={style.companyH2}>{company.name}</h2>
+            </div>
+
+            <div className={style.formGroup}>
+            <h1 className={style.companyH1}>Company Email:</h1>
+            <h2 className={style.companyH2}>{company.email}</h2>
+            </div>
+
+            <div className={style.formGroup}>
+            <h1 className={style.companyH1}>Company Phone Number:</h1>
+            <h2 className={style.companyH2}>{company.phone}</h2>
+            </div>
+
+            <div className={style.formGroup}>
+            <h1 className={style.companyH1}>Company Address:</h1>
+            <h2 className={style.companyH2}>{company.address}</h2>
+            </div>
           </div>
           <div>
             
         <button> <Link to={`/company/${companyId}/edit`}>Edit</Link></button> 
             <button onClick={() => props.handleDeleteCompany(companyId)}>
-              Delete
+            <Link to={`/company`} > Delete</Link>
             </button>
-          </div>
+            </div>
+            </div>
         </>
       ) : (
         <p>Loading...</p>

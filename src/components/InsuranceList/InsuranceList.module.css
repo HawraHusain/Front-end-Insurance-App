@@ -4,13 +4,21 @@
     justify-content: center;
     align-items: center;
     display: flex;  
-    width: 10rem;
-    height: 5rem;
-    border-radius: 200px;
+    width: 20rem;
+    height: 15rem;
 }
 .container{
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 20px;
+}
+
+img{
+    width: 140px;
+    height: 75px;
+}
+.dateH2{
+    color:  #3e5836;
+    font-size: 1rem;
 }

@@ -1,7 +1,7 @@
 import { useParams, Link } from "react-router";
 import { useEffect, useState } from "react";
 import * as InsuranceService from "../../services/InsuranceService";
-
+import style from "./InsuranceDetails.module.css"
 const InsuranceDetails = (props) => {
   const { insurancePolicyId } = useParams();
   const [insurance, setInsurance] = useState(null);
@@ -9,11 +9,6 @@ const InsuranceDetails = (props) => {
   useEffect(() => {
     const fetchInsurancePolicy = async () => {
       const insurancePolicyData = await InsuranceService.showInsurance(insurancePolicyId);
-      // const formattedDateIssued = insurancePolicyData.dateIssued.split('T')[0]
-      // const formattedDateExpiry = insurancePolicyData.dateExpiry.split('T')[0]
-      // insurancePolicyData.dateExpiry = formattedDateExpiry
-      // insurancePolicyData.dateIssued = formattedDateIssued
-      // console.log(insurancePolicyData.dateExpiry);
       setInsurance(insurancePolicyData);
     };
     fetchInsurancePolicy();
@@ -23,19 +18,39 @@ const InsuranceDetails = (props) => {
     <main>
       {insurance ? (
         <>
-          <div>
-            <h2>
-              {insurance.policyNo} - {insurance.category}
-            </h2>
-            <p>Policy Number: {insurance.policyNo}</p>
-            <p>Category: {insurance.category}</p>
-            <p>Subscription Price: ${insurance.subscriptionPrice}</p>
-            <p>
-              Issued on: {new Date(insurance.dateIssued).toLocaleDateString()}
-            </p>
-            <p>
-              Expires on: {new Date(insurance.dateExpiry).toLocaleDateString()}
-            </p>
+        <h1>                   {insurance.policyNo} - {insurance.category}
+        </h1>
+          <div className={style.container}>
+                       <div className={style.formBK}>
+                    <img src={insurance.icon} className={style.imgCss}/>
+                    <div className={style.formGroup}>
+                    <h1 className={style.companyH1}>Policy Number: </h1>
+                    <h2 className={style.companyH2}>{insurance.policyNo}</h2>
+                    </div>
+        
+                    <div className={style.formGroup}>
+                    <h1 className={style.companyH1}>Category:</h1>
+                    <h2 className={style.companyH2}>{insurance.category}</h2>
+                    </div>
+        
+                    <div className={style.formGroup}>
+                    <h1 className={style.companyH1}>Subscription Price:</h1>
+                    <h2 className={style.companyH2}>{insurance.subscriptionPrice}</h2>
+                    </div>
+
+                    <div className={style.formGroup}>
+                    <h1 className={style.companyH1}>Issued on:</h1>
+                    <h2 className={style.companyH2}>{new Date(insurance.dateIssued).toLocaleDateString()}</h2>
+                    </div>
+
+                    <div className={style.formGroup}>
+                    <h1 className={style.companyH1}> Expires on:</h1>
+                    <h2 className={style.companyH2}>{new Date(insurance.dateExpiry).toLocaleDateString()}</h2>
+                    </div>
+                    
+                  </div>
+                  <div>
+                    
             <button>
               <Link to={`/insurance/${insurancePolicyId}/edit`}>
                 Edit Policy
@@ -45,6 +60,8 @@ const InsuranceDetails = (props) => {
               Delete
             </button>
           </div>
+          </div>
+
         </>
       ) : (
         <p>Loading...</p>

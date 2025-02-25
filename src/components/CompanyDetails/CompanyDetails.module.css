@@ -1,0 +1,32 @@
+.formGroup {
+    display: flex;
+    flex-direction: row;
+    color: #3e5836;
+    gap: 10px;
+}
+.formBK {
+    border: none;
+    background-color: white;
+    justify-content: center;
+    align-items: center;
+    width: 40rem;
+    height: auto; 
+    padding: 2rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    border-radius: 8px; 
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+}
+.companyH1{
+    color: #3e5836;
+    font-size: 1.5rem;
+}
+.companyH2{
+    color: rgb(65, 145, 207);
+    font-size: 1.5rem;
+}
