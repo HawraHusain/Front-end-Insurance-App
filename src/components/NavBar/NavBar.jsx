@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { Link ,useLocation } from 'react-router';
 
 import { UserContext } from '../../contexts/UserContext';
-import styles from './NavBar.module.css';
+import'./NavBar.module.css';
 const NavBar = () => {
   const { user, setUser } = useContext(UserContext);
   const location = useLocation(); 
