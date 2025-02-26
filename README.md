@@ -6,7 +6,7 @@ This is a web-based application designed to manage insurance policies for users 
 - **Deployed App**: [Visit the deployed app](https://your-app-url.com)
 - **Project Planning (Trello)**: [Project Planning on Trello](https://trello.com/b/JfM6GYk9/insurance-management-app)
 - **Backend Repository**: [Backend Repository on GitHub](https://github.com/HawraHusain/Back-end-Insurance-App.git)
-- **Frontend Repository**: (https://github.com/HawraHusain/Front-end-Insurance-App.git)
+- **Frontend Repository**: [Frontend Repository on GitHub](https://github.com/HawraHusain/Front-end-Insurance-App.git)
 ### Prerequisites
 - **Node.js**: Make sure you have [Node.js](https://nodejs.org/) installed.
 - **MongoDB**: You need access to a MongoDB database (local or cloud-based).
@@ -16,7 +16,7 @@ This is a web-based application designed to manage insurance policies for users 
     git clone https://github.com/HawraHusain/Back-end-Insurance-App.git
   cd Back-end-Insurance-App,
   git clone https://github.com/HawraHusain/Front-end-Insurance-App.git
-    cd cd Front-end-Insurance-App
+    cd Front-end-Insurance-App
 2. Install dependencies:
     ```bash
     npm install
@@ -32,10 +32,21 @@ This is a web-based application designed to manage insurance policies for users 
     npm start
     ```
     ## Usage
-- Visit `http://localhost:3000` in your browser to access the application.
+- Visit `http://localhost:5173` in your browser to access the application.
 - Log in with your credentials or sign up if you’re a new user.
 - Manage insurance policies from the user dashboard.
-![Screenshot](./path-to-screenshot.png)
+![Screenshot](https://i.imghippo.com/files/bCQ7316ubE.png)
+![Screenshot](https://i.imghippo.com/files/pAwJ5153VT.png)
+![Screenshot](https://i.imghippo.com/files/JwAS5307Ev.png)
+![Screenshot](https://i.imghippo.com/files/nci1078hyw.png)
+![Screenshot](https://i.imghippo.com/files/HKfN4308Ur.png)
+![Screenshot](https://i.imghippo.com/files/HnB7984szo.png)
+![Screenshot](https://i.imghippo.com/files/SsuT5499zlI.png)
+![Screenshot](https://i.imghippo.com/files/pmO6070jME.png)
+![Screenshot](https://i.imghippo.com/files/zmeC6786FOE.png)
+![Screenshot](https://i.imghippo.com/files/uGRd4213vs.png)
+![Screenshot](https://i.imghippo.com/files/bO3240vGs.png)
+
 ## Technologies Used
 - **React**: Frontend framework.
 - **Express**: Backend framework.
